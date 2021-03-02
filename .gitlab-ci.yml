@@ -1,0 +1,16 @@
+image: node:latest
+stages:
+  - deploy
+production:
+  stage: deploy
+  before_script:
+    - npm install -g serverless
+    - npm install -g serverless-offline
+    - serverless config credentials --provider aws --key ***** --secret *** --profile serverlessUser
+    - npm install firebase
+    - npm install axios
+    - npm install mongodb
+    - npm install joi
+    - npm install stripe
+  script:
+    - serverless deploy --stage $BRANCH_NAME --verbose
